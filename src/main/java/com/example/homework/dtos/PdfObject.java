@@ -16,7 +16,7 @@ public class PdfObject {
     private String id;
     private String name;
     private String surname;
-    private Integer salary;
-    private Integer tax;
-    private Integer extraSalary;
+    private Integer fee;
+    private Integer amount;
+    private Integer period;
 }
