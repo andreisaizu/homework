@@ -25,4 +25,16 @@ public class XmlBean {
 
     @Column(name = "XML")
     String xmlObject;
+
+    @Column(name = "Salary")
+    Integer salary;
+
+    @Column(name = "ExtraSalaries")
+    Integer extraSalaries;
+
+    @Column(name = "LastName")
+    String lastName;
+
+    @Column(name = "FirstName")
+    String firstName;
 }

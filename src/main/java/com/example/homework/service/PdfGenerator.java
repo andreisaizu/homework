@@ -21,31 +21,7 @@ public class PdfGenerator {
         this.pdfObject = pdfObject;
     }
 
-    private String getTextForPDF(){
-        return pdfObject.getName() + "       " + pdfObject.getSurname();
-    }
-
-    public void generatePdf() throws IOException {
-        PDDocument document = new PDDocument();
-        PDPage page = new PDPage();
-
-        document.addPage(page);
-
-        PDPageContentStream contentStream = new PDPageContentStream(document, page);
-        contentStream.setFont(PDType1Font.COURIER, 12);
-        contentStream.beginText();
-        contentStream.moveTo(10, 700);
-        contentStream.showText(getTextForPDF());
-        contentStream.endText();
-        contentStream.close();
-
-        document.save("pdfBoxHelloWorld.pdf");
-        document.close();
-        log.info("pdf written");
-    }
-
-
-    public void generatePdfDocumentTemplate1() throws IOException {
+    public void generateDocument() throws IOException {
         PDDocument document = new PDDocument();
         PDPage page = new PDPage();
         document.addPage(page);
@@ -65,34 +41,50 @@ public class PdfGenerator {
         contentStream.showText (pdfObject.getSurname());
         contentStream.newLineAtOffset(-200, -50);
         contentStream.setFont(fontBold, 15);
-        contentStream.showText("Amount: ");
+        contentStream.showText("Salary: ");
         contentStream.setFont(fontNormal, 15);
-        contentStream.showText (pdfObject.getAmount().toString());
+        contentStream.showText (pdfObject.getSalary().toString() +" lei");
         contentStream.newLineAtOffset(0, -50);
         contentStream.setFont(fontBold, 15);
-        contentStream.showText("Fee: ");
+        contentStream.showText("Extra salary: ");
         contentStream.setFont(fontNormal, 15);
-        contentStream.showText (pdfObject.getFee().toString());
+        contentStream.showText (pdfObject.getExtraSalary().toString());
         contentStream.newLineAtOffset(0, -50);
         contentStream.setFont(fontBold, 15);
-        contentStream.showText("Period: ");
+        contentStream.showText("Tax: ");
         contentStream.setFont(fontNormal, 15);
-        contentStream.showText (pdfObject.getPeriod().toString());
+        contentStream.showText (pdfObject.getTax().toString() + "%");
         contentStream.newLineAtOffset(0, -50);
         contentStream.setFont(fontBold, 15);
-        contentStream.showText("Total amount to be paid: ");
-        Integer x = pdfObject.getAmount()/pdfObject.getFee()+pdfObject.getAmount();
-        contentStream.showText (x.toString());
+        contentStream.showText("Net salary: ");
+        Integer x = pdfObject.getSalary() -  (pdfObject.getSalary() *pdfObject.getTax())/100;
+        contentStream.showText (x.toString()+" lei");
         contentStream.newLineAtOffset(0, -50);
         contentStream.setFont(fontBold, 15);
-        contentStream.showText("Total amount to be paid monthly: ");
-        x = x/pdfObject.getPeriod();
-        contentStream.showText (x.toString());
+        contentStream.showText("Yearly salary: ");
+        Integer y = (x * 12) + pdfObject.getExtraSalary()*x;
+        contentStream.showText (y.toString() + " lei");
         contentStream.setFont(fontNormal, 15);
 
         contentStream.endText();
         contentStream.close();
-        document.save("pdfBoxHelloWorld.pdf");
+        document.save("homework.pdf");
         log.info("pdf written");
+    }
+
+    public static void generatePdfWithChart(String chart) throws IOException {
+        PDDocument document = new PDDocument();
+        PDPage page = new PDPage();
+        document.addPage(page);
+        PDFont fontNormal = PDType1Font.HELVETICA;
+        PDFont fontBold = PDType1Font.HELVETICA_BOLD;
+        PDPageContentStream contentStream =new PDPageContentStream(document, page);
+        contentStream.beginText();
+        contentStream.newLineAtOffset(0, 700);
+        contentStream.setFont(fontBold, 15);
+        contentStream.showText (chart);
+        contentStream.endText();
+        contentStream.close();
+        document.save("homework_chart.pdf");
     }
 }
