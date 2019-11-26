@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface XmlRepository extends CrudRepository<XmlBean, BigDecimal> {
-    List<XmlBean> findBySalaryGreaterThanAndSalaryLessThan(Integer minSalary, Integer maxSalary);
+    List<XmlBean> findByAmountGreaterThanAndAmountLessThan(Integer minSalary, Integer maxSalary);
 }

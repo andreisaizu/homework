@@ -16,21 +16,21 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="XMLObject")
+@Table(name="DateDragos")
 public class XmlBean {
 
     @Id
     @Column(name = "Id")
     String id;
 
-    @Column(name = "XML")
-    String xmlObject;
+    @Column(name = "Period")
+    Integer period;
 
-    @Column(name = "Salary")
-    Integer salary;
+    @Column(name = "Fee")
+    Integer fee;
 
-    @Column(name = "ExtraSalaries")
-    Integer extraSalaries;
+    @Column(name = "Amount")
+    Integer amount;
 
     @Column(name = "LastName")
     String lastName;

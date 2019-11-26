@@ -20,7 +20,7 @@ public class GeneratePdfService {
 
     public void generatePdf(PdfObject pdfObject) throws IOException {
         PdfGenerator pdfGenerator = new PdfGenerator(pdfObject);
-        pdfGenerator.generateDocument();
+       // pdfGenerator.generateDocument();
     }
 
 
